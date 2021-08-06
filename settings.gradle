@@ -1,0 +1,8 @@
+include ':filemanagermodule'
+include ':wifisharemodule'
+include ':bluemodule'
+include ':videomodule'
+include ':picmodule'
+include ':basemodule'
+include ':app'
+rootProject.name = "DMarkNewPlayer"
