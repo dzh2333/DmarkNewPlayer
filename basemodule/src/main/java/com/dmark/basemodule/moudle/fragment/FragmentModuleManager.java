@@ -1,0 +1,51 @@
+package com.dmark.basemodule.moudle.fragment;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.collection.SparseArrayCompat;
+
+import com.dmark.basemodule.moudle.ModuleFactory;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class FragmentModuleManager extends FModuleManager {
+
+    public void initModules(Bundle saveInstance,
+                            Activity activity,
+                            View rootView,
+                            HashMap<String, ArrayList<Integer>> modules) {
+        if (activity == null || modules == null) {
+            return;
+        }
+
+        //配置Activity下的所有module全限定名 后续可以根据名称还原module实体（实体才包含ViewGroup、Activity等参数）
+        moduleConfig(new ArrayList<>(modules.keySet()));
+        //依次给所有module初始化：1.创建实体 2.传递参数 3.调用初始化 4.纳入生命周期管理
+        for (String moduleName : modules.keySet()) {
+            //创建对应module
+            FbsModule module = ModuleFactory.newModuleInstance(moduleName);
+            if (module != null) {
+                //创建参数
+                FragmentModuleContext moduleContext = new FragmentModuleContext();
+                moduleContext.setContext(activity);
+                moduleContext.setSaveInstance(saveInstance);
+                SparseArrayCompat<ViewGroup> viewGroups = new SparseArrayCompat<>();
+                ArrayList<Integer> mViewIds = modules.get(moduleName);
+                if (mViewIds != null && mViewIds.size() > 0) {
+                    for (int i = 0; i < mViewIds.size(); i++) {
+                        viewGroups.put(i, (ViewGroup) rootView.findViewById(mViewIds.get(i)));
+                    }
+                }
+                moduleContext.setViewGroups(viewGroups);
+                //调用初始化（参数传递）
+                module.init(moduleContext);
+                //纳入管理
+                allModules.put(moduleName, module);
+            }
+        }
+    }
+}

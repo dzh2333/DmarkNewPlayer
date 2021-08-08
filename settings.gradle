@@ -1,6 +1,6 @@
 include ':filemanagermodule'
 include ':wifisharemodule'
-include ':bluemodule'
+include ':btmodule'
 include ':videomodule'
 include ':picmodule'
 include ':basemodule'
