@@ -29,19 +29,19 @@ public abstract class ModuleManagerFragment extends LazyLoadFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = LayoutInflater.from(getContext()).inflate(layoutId(), container, true);
+        rootView = LayoutInflater.from(getContext()).inflate(layoutId(), container, false);
         ViewTreeObserver viewTreeObserver = rootView.getViewTreeObserver();
-        viewTreeObserver.addOnWindowAttachListener(new ViewTreeObserver.OnWindowAttachListener() {
-            @Override
-            public void onWindowAttached() {
-                if (fragmentModuleManager == null) {
-                    initModuleManager(savedInstanceState);
-                }
-            }
-            @Override
-            public void onWindowDetached() {
-            }
-        });
+//        viewTreeObserver.addOnWindowAttachListener(new ViewTreeObserver.OnWindowAttachListener() {
+//            @Override
+//            public void onWindowAttached() {
+//                if (fragmentModuleManager == null) {
+//                    initModuleManager(savedInstanceState);
+//                }
+//            }
+//            @Override
+//            public void onWindowDetached() {
+//            }
+//        });
         return rootView;
     }
 

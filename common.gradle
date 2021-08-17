@@ -1,7 +1,7 @@
 project.ext.compileSdkVersion = 30
 project.ext.buildToolsVersion = "30.0.3"
 project.ext.applicationId = "com.dmark.dmarknewplayer"
-project.ext.minSdkVersion = 19
+project.ext.minSdkVersion = 21
 project.ext.targetSdkVersion = 30
 project.ext.targetSdkVersion = 30
 project.ext.versionCode = 1
